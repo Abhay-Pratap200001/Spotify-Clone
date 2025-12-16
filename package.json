@@ -1,0 +1,40 @@
+{
+  "name": "spotify-clone",
+  "version": "1.0.0",
+  "description": "Building a spotify-clone using mern-stack",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server/index.js",
+    "start": "node server/index.js",
+    "build": "npm install && npm install --prefix f && npm run build --prefix f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abhay-Pratap200001/Spotify-Clone.git"
+  },
+  "keywords": [
+    "MERN",
+    "JAVASCRIPT",
+    "NODE.JS",
+    "EXPRESS.JS"
+  ],
+  "author": "Abhay Pratap",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abhay-Pratap200001/Spotify-Clone/issues"
+  },
+  "homepage": "https://github.com/Abhay-Pratap200001/Spotify-Clone#readme",
+  "dependencies": {
+    "@clerk/express": "^1.7.58",
+    "cloudinary": "^2.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.0.1",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
