@@ -1,9 +1,19 @@
-import React from 'react'
-
-const App = () => {
+import { Button } from "@/components/ui/button"
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react"
+ 
+function App() {
   return (
-    <div className='bg-slate-400'>App</div>
+    <div>
+      <header>
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+    </header>
+    </div>
   )
 }
-
+ 
 export default App
