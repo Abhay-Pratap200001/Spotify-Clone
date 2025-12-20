@@ -17,6 +17,7 @@ import statsRoutes from './routes/stats.routes.js'
 dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 7000
+app.use(express.json()) //to accept data from client
 
 app.use("/api/users", userRoutes) 
 app.use("/api/auth", authRoutes)
