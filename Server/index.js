@@ -1,5 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import { clerkMiddleware } from '@clerk/express'
+import path from 'path'
+import fileUpload from 'express-fileupload'
+
+
 
 import { connectDB } from './lib/dbConnection.js'
 import { errorHandler } from './middleware.js/error.midleware.js'
@@ -12,12 +17,24 @@ import songRoutes from './routes/song.routes.js'
 import albumRoutes from './routes/album.routes.js'
 import statsRoutes from './routes/stats.routes.js'
 
-
-
 dotenv.config()
+
+const __dirname = path.resolve()
 const app = express()
 const PORT = process.env.PORT || 7000
+
 app.use(express.json()) //to accept data from client
+
+app.use(clerkMiddleware()) //this will add auth to req.body so we can verify user by using => req.auth
+
+app.use(fileUpload({
+  tempFileDir: path.join(__dirname, "temp"),
+  createParentPath:true,
+  limits:{
+    fileSize:10 * 1024 * 1024   //10 mb max file
+  }
+}))
+
 
 app.use("/api/users", userRoutes) 
 app.use("/api/auth", authRoutes)
