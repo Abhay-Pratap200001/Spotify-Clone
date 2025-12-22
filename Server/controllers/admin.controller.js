@@ -73,8 +73,49 @@ export const deleteSong = asynHandler(async(req, res) =>{
         }
 
         await Song.findByIdAndDelete(id)
-        res.status(200).json({message: 'Song deleted successfully'})
+        res.status(200).json({success: true, message: 'Song deleted successfully'})
     } catch (error) {
         console.log('Failed to delete song erro in deletSong funxtion under the admin.controller', error);
     }
+})
+
+
+
+
+export const createAlbum = asynHandler(async(req, res) =>{
+    try {
+        const {title, artist, releaseYear} = req.body
+        const {imageFile} = req.file
+
+        const imageUrl = await uploadToCloudinary(imageFile)
+
+        const album = new Album({
+            title,
+            artist,
+            imageUrl,
+            releaseYear
+        })
+        await album.save()
+        res.status(200).json(album)
+    } catch (error) {
+        console.log("Failed to create album erro in creteAlbum function in admin.controller file", error);
+        throw new ApiError(500, "Internal server error");
+    }
+})
+
+export const deleteAlbum  = asynHandler(async(req, res) =>{
+    try {
+        const {id} = req.params //accepting id from client and we put name of that {id} because in route we say /album:id
+        await Song.deleteMany({albumId: id}) //we are saying delet all song which is linked to this album id
+        await Album.findByIdAndDelete(id) // delete that specific album
+        return res.status(200).json({success: true, message: "Album and related songs deleted successfully"});
+    } catch (error) {
+        console.log("Failed to delete album erro in deleteAlbum function in admin.controller file", error);
+        throw new ApiError(500, "Internal server error");
+    }
+})
+
+
+export const checkAdmin = asynHandler(async(req, res) => {
+    res.status(200).json({admin:true})
 })
