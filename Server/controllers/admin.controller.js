@@ -60,3 +60,21 @@ export const createSong = asynHandler(async (req, res) => {
 })
 
 
+export const deleteSong = asynHandler(async(req, res) =>{
+    try {
+        const {id} = req.params //accepting id from client and we put name of that {id} because in route we say /songs:id
+        const song = await  Song.findById(id)
+
+        // if album is attach to song id pull out song id from album then delete the song
+        if (song.albumId) {
+            await Album.findByIdAndUpdate(song.albumId,{
+                $pull:{song: song._id}
+            })
+        }
+
+        await Song.findByIdAndDelete(id)
+        res.status(200).json({message: 'Song deleted successfully'})
+    } catch (error) {
+        console.log('Failed to delete song erro in deletSong funxtion under the admin.controller', error);
+    }
+})
