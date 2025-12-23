@@ -1,8 +1,9 @@
 import express from "express";
+import { getAlbumById, getAllAlbums } from "../controllers/album.controller.js";
 const router = express.Router()
 
-router.get("/", (req, res) => {
-    res.send("albums Route")
-})
+router.get("/", getAllAlbums)
+router.get("/:albumId", getAlbumById)
 
-export default router
+
+export default router 
