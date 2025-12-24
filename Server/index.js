@@ -15,7 +15,7 @@ import authRoutes from './routes/auth.routes.js'
 import adminRoutes from './routes/admin.routes.js'
 import songRoutes from './routes/song.routes.js'
 import albumRoutes from './routes/album.routes.js'
-import statsRoutes from './routes/stats.routes.js'
+import statRoutes from './routes/stat.routes.js'
 
 dotenv.config()
 
@@ -41,7 +41,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/admin", adminRoutes)
 app.use("/api/songs", songRoutes)
 app.use("/api/albums", albumRoutes)
-app.use("/api/stats", statsRoutes)
+app.use("/api/stats", statRoutes)
 
 
 

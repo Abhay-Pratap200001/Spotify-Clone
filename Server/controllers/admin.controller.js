@@ -80,6 +80,7 @@ export const deleteSong = asynHandler(async(req, res) =>{
 })
 
 
+// ******************************************************************************************************************************//
 
 
 export const createAlbum = asynHandler(async(req, res) =>{
@@ -103,6 +104,7 @@ export const createAlbum = asynHandler(async(req, res) =>{
     }
 })
 
+
 export const deleteAlbum  = asynHandler(async(req, res) =>{
     try {
         const {id} = req.params //accepting id from client and we put name of that {id} because in route we say /album:id
@@ -114,6 +116,9 @@ export const deleteAlbum  = asynHandler(async(req, res) =>{
         throw new ApiError(500, "Internal server error");
     }
 })
+
+
+
 
 
 export const checkAdmin = asynHandler(async(req, res) => {
